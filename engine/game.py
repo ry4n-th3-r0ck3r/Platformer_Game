@@ -16,7 +16,7 @@ class Game:
             (self.width, self.height)
         )
 
-        pygame.display.set_caption("Platformer Game")
+        pygame.display.set_caption("Platformer")
 
         # Game clock
         self.clock = pygame.time.Clock()

@@ -15,6 +15,159 @@ This project follows an incremental, Agile development approach, with new featur
 - PyCharm
 - Git and GitHub
 
+## Planned Sprints
+
+
+Sprint 1: Core Game Loop
+
+Status: Complete
+
+Initialize Pygame.
+
+Create the application window.
+
+Implement the main game loop.
+
+Handle application events.
+
+Implement frame rate limiting.
+
+Ensure clean application shutdown.
+
+
+
+Sprint 2: Basic Rendering System
+
+Status: Complete
+
+Implement a basic Entity class.
+
+Implement a dedicated Renderer class.
+
+Separate entity data from rendering logic.
+
+Support rendering multiple entities.
+
+Display placeholder objects using colored rectangles.
+
+Planned Sprints
+
+
+
+Sprint 3: Player Movement
+
+Status: Current
+
+Implement a Player class.
+
+Introduce keyboard input handling.
+
+Support horizontal player movement.
+
+Separate input processing from movement logic.
+
+Implement frame-independent movement.
+
+
+
+Sprint 4: Gravity and Jumping
+
+Status: Planned
+
+Introduce vertical velocity.
+
+Implement gravity.
+
+Implement jumping mechanics.
+
+Establish basic physics parameters.
+
+
+
+Sprint 5: Collision Detection
+
+Status: Planned
+
+Implement collision detection between entities.
+
+Resolve collisions with solid surfaces.
+
+Prevent movement through walls and platforms.
+
+Implement grounded-state detection.
+
+
+
+Sprint 6: Camera System
+
+Status: Planned
+
+Implement a scrolling camera.
+
+Support levels larger than the game window.
+
+Track the player as they move through the world.
+
+Separate world coordinates from screen coordinates.
+
+
+
+Sprint 7: Level Management
+
+Status: Planned
+
+Implement a Level class.
+
+Introduce tile-based environments.
+
+Support loading levels from external files.
+
+Separate level data from engine functionality.
+
+
+
+Sprint 8: Sprite and Animation Support
+
+Status: Planned
+
+Load external image assets.
+
+Replace placeholder rectangles with sprites.
+
+Implement basic sprite animations.
+
+Maintain separation between rendering and game logic.
+
+
+
+Sprint 9: Entity Management
+
+Status: Planned
+
+Expand the entity system.
+
+Support multiple entity types.
+
+Introduce basic enemy entities.
+
+Support entity creation and removal during gameplay.
+
+
+
+Sprint 10: Engine Extensibility
+
+Status: Planned
+
+Evaluate the existing architecture.
+
+Establish interfaces for optional gameplay systems.
+
+Support extending entities with additional functionality.
+
+Demonstrate modularity through a simple optional system.
+
+Refactor existing components where necessary.
+
 ## Project Goals
 
 - Develop a reusable 2D platformer engine.
@@ -23,28 +176,6 @@ This project follows an incremental, Agile development approach, with new featur
 - Support customizable sprites, levels, and gameplay mechanics.
 - Allow additional systems, such as inventories and combat mechanics, to be implemented independently.
 - Maintain a functioning engine throughout development.
-
-## Current Features
-
-### Sprint 1: Core Game Loop (Complete)
-
-- Pygame initialization.
-- Game window creation.
-- Main game loop.
-- Event handling.
-- Frame rate limiting.
-- Clean application shutdown.
-
-## Planned Features
-
-- Entity management
-- Basic rendering system
-- Player movement and jumping
-- Gravity and collision detection
-- Camera scrolling
-- Tile-based level management
-- Sprite and animation support
-- Optional gameplay systems
 
 ## Installation
 
@@ -64,9 +195,9 @@ python main.py
 
 ## Development Status
 
-**Current Version:** (Early Development)
+**Current Version:** 0.2.0
 
-**Current Sprint:** Sprint 2 — Basic Rendering System
+**Current Sprint:** Sprint 3 — Basic Rendering System
 
 This project is under active development. Features and architecture may change as development progresses.
 

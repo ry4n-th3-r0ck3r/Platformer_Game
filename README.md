@@ -34,7 +34,7 @@ Implement frame rate limiting.
 
 Ensure clean application shutdown.
 
-
+*****************************************
 
 Sprint 2: Basic Rendering System
 
@@ -52,7 +52,7 @@ Display placeholder objects using colored rectangles.
 
 Planned Sprints
 
-
+*****************************************
 
 Sprint 3: Player Movement
 
@@ -68,7 +68,7 @@ Separate input processing from movement logic.
 
 Implement frame-independent movement.
 
-
+*****************************************
 
 Sprint 4: Gravity and Jumping
 
@@ -82,7 +82,7 @@ Implement jumping mechanics.
 
 Establish basic physics parameters.
 
-
+*****************************************
 
 Sprint 5: Collision Detection
 
@@ -96,7 +96,7 @@ Prevent movement through walls and platforms.
 
 Implement grounded-state detection.
 
-
+*****************************************
 
 Sprint 6: Camera System
 
@@ -110,7 +110,7 @@ Track the player as they move through the world.
 
 Separate world coordinates from screen coordinates.
 
-
+*****************************************
 
 Sprint 7: Level Management
 
@@ -124,7 +124,7 @@ Support loading levels from external files.
 
 Separate level data from engine functionality.
 
-
+*****************************************
 
 Sprint 8: Sprite and Animation Support
 
@@ -138,7 +138,7 @@ Implement basic sprite animations.
 
 Maintain separation between rendering and game logic.
 
-
+*****************************************
 
 Sprint 9: Entity Management
 
@@ -152,7 +152,7 @@ Introduce basic enemy entities.
 
 Support entity creation and removal during gameplay.
 
-
+*****************************************
 
 Sprint 10: Engine Extensibility
 
@@ -167,6 +167,8 @@ Support extending entities with additional functionality.
 Demonstrate modularity through a simple optional system.
 
 Refactor existing components where necessary.
+
+*****************************************
 
 ## Project Goals
 

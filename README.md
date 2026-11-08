@@ -56,7 +56,7 @@ Planned Sprints
 
 Sprint 3: Player Movement
 
-Status: Current
+Status: Complete
 
 Implement a Player class.
 
@@ -72,7 +72,7 @@ Implement frame-independent movement.
 
 Sprint 4: Gravity and Jumping
 
-Status: Planned
+Status: Current
 
 Introduce vertical velocity.
 

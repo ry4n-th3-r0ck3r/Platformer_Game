@@ -1,6 +1,9 @@
 import pygame
+
 from engine.entities.entity import Entity
+from engine.entities.player import Player
 from engine.renderer import Renderer
+from engine.input_handler import InputHandler
 
 
 class Game:
@@ -29,38 +32,41 @@ class Game:
         # Store game entities
         self.entities = []
 
-            #placeholder
-        self.entities.append(
-            Entity(100, 400, 32, 48, (0, 100, 255))
+        # Initialize renderer
+        self.renderer = Renderer(self.screen)
+
+        # Initialize input handler
+        self.input_handler = InputHandler()
+
+        # Create player
+        self.player = Player(
+            100, 400, 32, 48, (0, 100, 255)
         )
 
-        # Ground
-        self.entities.append(
-            Entity(0, 550, 800, 50, (0, 180, 0))
-        )
+        # Create entity list
+        self.entities = [
+            self.player,
 
-        # Floating platforms
-        self.entities.append(
-            Entity(250, 450, 150, 20, (0, 180, 0))
-        )
+            # Ground
+            Entity(0, 550, 800, 50, (0, 180, 0)),
 
-        self.entities.append(
+            # Platforms
+            Entity(250, 450, 150, 20, (0, 180, 0)),
             Entity(500, 350, 150, 20, (0, 180, 0))
-        )
+        ]
 
         # Running state
         self.running = True
 
     def run(self):
         while self.running:
+            dt = self.clock.tick(self.fps) / 1000.0
 
             self.handle_events()
 
-            self.update()
+            self.update(dt)
 
             self.render()
-
-            self.clock.tick(self.fps)
 
         pygame.quit()
 
@@ -70,8 +76,13 @@ class Game:
             if event.type == pygame.QUIT:
                 self.running = False
 
-    def update(self):
-        pass
+    def update(self, dt):
+
+        direction = self.input_handler.get_horizontal_input()
+
+        self.player.velocity_x = direction * self.player.speed
+
+        self.player.update(dt)
 
     def render(self):
 

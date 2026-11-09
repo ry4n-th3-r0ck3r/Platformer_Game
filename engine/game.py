@@ -55,12 +55,16 @@ class Game:
             Entity(500, 350, 150, 20, (0, 180, 0))
         ]
 
+        # Temporary floor boundary
+        self.floor_y = 550
+
         # Running state
         self.running = True
 
     def run(self):
         while self.running:
-            dt = self.clock.tick(self.fps) / 1000.0
+            # Limit delta time to prevent large physics jumps during frame drops
+            dt = min(self.clock.tick(self.fps) / 1000.0, 0.05)
 
             self.handle_events()
 
@@ -71,18 +75,32 @@ class Game:
         pygame.quit()
 
     def handle_events(self):
+
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:
                 self.running = False
 
+            elif self.input_handler.get_jump_input(event):
+                self.player.jump()
+
     def update(self, dt):
 
+        # Horizontal input
         direction = self.input_handler.get_horizontal_input()
 
         self.player.velocity_x = direction * self.player.speed
 
+        # Update player physics
         self.player.update(dt)
+
+        # Temporary floor collision
+        if self.player.y + self.player.height >= self.floor_y:
+            self.player.y = self.floor_y - self.player.height
+
+            self.player.velocity_y = 0
+
+            self.player.grounded = True
 
     def render(self):
 

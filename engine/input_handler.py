@@ -16,3 +16,10 @@ class InputHandler:
             direction += 1
 
         return direction
+
+    def get_jump_input(self, event):
+
+        return (
+                event.type == pygame.KEYDOWN
+                and event.key in (pygame.K_SPACE, pygame.K_w, pygame.K_UP)
+        )

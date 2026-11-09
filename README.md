@@ -72,7 +72,7 @@ Implement frame-independent movement.
 
 Sprint 4: Gravity and Jumping
 
-Status: Current
+Status: Complete
 
 Introduce vertical velocity.
 

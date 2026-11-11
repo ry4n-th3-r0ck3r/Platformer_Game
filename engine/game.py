@@ -15,7 +15,7 @@ class Game:
         # Window configuration
         self.width = 800
         self.height = 600
-        self.fps = 60
+        self.fps = 30
 
         # Initialize display
         self.screen = pygame.display.set_mode(

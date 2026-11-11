@@ -86,7 +86,7 @@ Establish basic physics parameters.
 
 Sprint 5: Collision Detection
 
-Status: In Progress
+Status: Complete
 
 Implement collision detection between entities.
 
@@ -96,11 +96,19 @@ Prevent movement through walls and platforms.
 
 Implement grounded-state detection.
 
+## Known Limitations:
+
+-Collision detection currently supports rectangular geometry.
+
+-Moving platforms and dynamic object to object collisions are not yet supported.
+
+-Complex diagonal collisions and multiple simultaneous contacts may require additional refinement.
+
 *****************************************
 
 Sprint 6: Camera System
 
-Status: Planned
+Status: In Progress
 
 Implement a scrolling camera.
 
@@ -197,9 +205,9 @@ python main.py
 
 ## Development Status
 
-**Current Version:** 0.2.0
+**Current Version:** 0.5.0
 
-**Current Sprint:** Sprint 3 — Basic Rendering System
+**Current Sprint:** Sprint 6 — Camera System
 
 This project is under active development. Features and architecture may change as development progresses.
 

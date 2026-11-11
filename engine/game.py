@@ -4,6 +4,7 @@ from engine.entities.entity import Entity
 from engine.entities.player import Player
 from engine.renderer import Renderer
 from engine.input_handler import InputHandler
+from engine.physics.collision import CollisionSystem
 
 
 class Game:
@@ -29,12 +30,6 @@ class Game:
         # Initialize renderer
         self.renderer = Renderer(self.screen)
 
-        # Store game entities
-        self.entities = []
-
-        # Initialize renderer
-        self.renderer = Renderer(self.screen)
-
         # Initialize input handler
         self.input_handler = InputHandler()
 
@@ -48,15 +43,12 @@ class Game:
             self.player,
 
             # Ground
-            Entity(0, 550, 800, 50, (0, 180, 0)),
+            Entity(0, 550, 800, 50, (0, 180, 0), solid=True),
 
             # Platforms
-            Entity(250, 450, 150, 20, (0, 180, 0)),
-            Entity(500, 350, 150, 20, (0, 180, 0))
+            Entity(250, 450, 150, 20, (0, 180, 0), solid=True),
+            Entity(500, 350, 150, 20, (0, 180, 0), solid=True)
         ]
-
-        # Temporary floor boundary
-        self.floor_y = 550
 
         # Running state
         self.running = True
@@ -86,21 +78,19 @@ class Game:
 
     def update(self, dt):
 
-        # Horizontal input
+        # Read horizontal input
         direction = self.input_handler.get_horizontal_input()
 
         self.player.velocity_x = direction * self.player.speed
 
-        # Update player physics
-        self.player.update(dt)
+        # Collect solid entities
+        solids = [
+            entity for entity in self.entities
+            if entity.solid
+        ]
 
-        # Temporary floor collision
-        if self.player.y + self.player.height >= self.floor_y:
-            self.player.y = self.floor_y - self.player.height
-
-            self.player.velocity_y = 0
-
-            self.player.grounded = True
+        # Update movement and resolve collisions
+        CollisionSystem.move(self.player, solids, dt)
 
     def render(self):
 
@@ -112,6 +102,4 @@ class Game:
             self.renderer.draw_entity(entity)
 
         # Update display
-        pygame.display.flip()
-
         pygame.display.flip()

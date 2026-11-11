@@ -22,14 +22,3 @@ class Player(Entity):
         if self.grounded:
             self.velocity_y = self.jump_strength
             self.grounded = False
-
-    def update(self, dt):
-
-        # Horizontal movement
-        self.x += self.velocity_x * dt
-
-        # Apply gravity
-        self.velocity_y += self.gravity * dt
-
-        # Vertical movement
-        self.y += self.velocity_y * dt

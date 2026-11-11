@@ -86,7 +86,7 @@ Establish basic physics parameters.
 
 Sprint 5: Collision Detection
 
-Status: Planned
+Status: In Progress
 
 Implement collision detection between entities.
 

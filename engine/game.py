@@ -5,6 +5,7 @@ from engine.entities.player import Player
 from engine.renderer import Renderer
 from engine.input_handler import InputHandler
 from engine.physics.collision import CollisionSystem
+from engine.camera import Camera
 
 
 class Game:
@@ -20,6 +21,16 @@ class Game:
         # Initialize display
         self.screen = pygame.display.set_mode(
             (self.width, self.height)
+        )
+        #Initialize camera
+        self.world_width = 3000
+        self.world_height = 600
+
+        self.camera = Camera(
+            self.width,
+            self.height,
+            self.world_width,
+            self.world_height
         )
 
         pygame.display.set_caption("Platformer")
@@ -40,14 +51,23 @@ class Game:
 
         # Create entity list
         self.entities = [
+
             self.player,
 
             # Ground
-            Entity(0, 550, 800, 50, (0, 180, 0), solid=True),
+            Entity(0, 550, 3000, 50, (0, 180, 0), solid=True),
 
             # Platforms
             Entity(250, 450, 150, 20, (0, 180, 0), solid=True),
-            Entity(500, 350, 150, 20, (0, 180, 0), solid=True)
+            Entity(500, 350, 150, 20, (0, 180, 0), solid=True),
+
+            Entity(900, 450, 150, 20, (0, 180, 0), solid=True),
+            Entity(1200, 400, 150, 20, (0, 180, 0), solid=True),
+            Entity(1500, 350, 150, 20, (0, 180, 0), solid=True),
+            Entity(1900, 450, 150, 20, (0, 180, 0), solid=True),
+            Entity(2200, 400, 150, 20, (0, 180, 0), solid=True),
+            Entity(2500, 400, 150, 20, (0, 180, 0), solid=True)
+
         ]
 
         # Running state
@@ -78,28 +98,26 @@ class Game:
 
     def update(self, dt):
 
-        # Read horizontal input
         direction = self.input_handler.get_horizontal_input()
 
         self.player.velocity_x = direction * self.player.speed
 
-        # Collect solid entities
         solids = [
             entity for entity in self.entities
             if entity.solid
         ]
 
-        # Update movement and resolve collisions
         CollisionSystem.move(self.player, solids, dt)
+
+        # Follow the player after updating their position
+        self.camera.follow(self.player)
 
     def render(self):
 
-        # Clear screen
         self.screen.fill((30, 30, 30))
 
-        # Draw entities
         for entity in self.entities:
-            self.renderer.draw_entity(entity)
+            self.renderer.draw_entity(entity, self.camera)
 
         # Update display
         pygame.display.flip()

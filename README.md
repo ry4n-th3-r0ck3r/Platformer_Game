@@ -108,7 +108,7 @@ Implement grounded-state detection.
 
 Sprint 6: Camera System
 
-Status: In Progress
+Status: Complete
 
 Implement a scrolling camera.
 
@@ -122,7 +122,7 @@ Separate world coordinates from screen coordinates.
 
 Sprint 7: Level Management
 
-Status: Planned
+Status: In Progress
 
 Implement a Level class.
 
@@ -205,10 +205,9 @@ python main.py
 
 ## Development Status
 
-**Current Version:** 0.5.0
+**Current Version:** 0.6.0
 
-**Current Sprint:** Sprint 6 — Camera System
-
+**Current Sprint:** Sprint 7 — Level Managment
 This project is under active development. Features and architecture may change as development progresses.
 
 ## Development Philosophy

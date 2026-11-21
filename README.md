@@ -207,7 +207,7 @@ python main.py
 
 **Current Version:** 0.6.0
 
-**Current Sprint:** Sprint 7 — Level Managment
+**Current Sprint:** Sprint 7 — Level Management
 This project is under active development. Features and architecture may change as development progresses.
 
 ## Development Philosophy

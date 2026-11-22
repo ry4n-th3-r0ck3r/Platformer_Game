@@ -1,0 +1,58 @@
+{
+  "name": "Test Level 02",
+  "width": 2000,
+  "height": 600,
+
+  "player_spawn": {
+    "x": 100,
+    "y": 400
+  },
+
+  "entities": [
+    {
+      "type": "platform",
+      "x": 0,
+      "y": 550,
+      "width": 2000,
+      "height": 50,
+      "color": [0, 120, 200],
+      "solid": true
+    },
+    {
+      "type": "platform",
+      "x": 350,
+      "y": 460,
+      "width": 150,
+      "height": 20,
+      "color": [0, 120, 200],
+      "solid": true
+    },
+    {
+      "type": "platform",
+      "x": 700,
+      "y": 400,
+      "width": 150,
+      "height": 20,
+      "color": [0, 120, 200],
+      "solid": true
+    },
+    {
+      "type": "platform",
+      "x": 1050,
+      "y": 460,
+      "width": 150,
+      "height": 20,
+      "color": [0, 120, 200],
+      "solid": true
+    },
+    {
+      "type": "platform",
+      "x": 1400,
+      "y": 400,
+      "width": 150,
+      "height": 20,
+      "color": [0, 120, 200],
+      "solid": true
+    }
+  ]
+}

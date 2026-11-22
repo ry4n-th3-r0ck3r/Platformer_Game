@@ -1,11 +1,13 @@
 import pygame
 
-from engine.entities.entity import Entity
 from engine.entities.player import Player
 from engine.renderer import Renderer
 from engine.input_handler import InputHandler
 from engine.physics.collision import CollisionSystem
 from engine.camera import Camera
+from pathlib import Path
+from engine.levels.level_loader import LevelLoader
+from engine.levels.level_manager import LevelManager
 
 
 class Game:
@@ -22,16 +24,6 @@ class Game:
         self.screen = pygame.display.set_mode(
             (self.width, self.height)
         )
-        #Initialize camera
-        self.world_width = 3000
-        self.world_height = 600
-
-        self.camera = Camera(
-            self.width,
-            self.height,
-            self.world_width,
-            self.world_height
-        )
 
         pygame.display.set_caption("Platformer")
 
@@ -44,34 +36,71 @@ class Game:
         # Initialize input handler
         self.input_handler = InputHandler()
 
-        # Create player
+        # Locate our level directory
+        project_root = Path(__file__).resolve().parent.parent
+
+        level_directory = project_root / "assets" / "levels"
+
+        # Initialize level management
+        self.level_manager = LevelManager(level_directory)
+
+        # Register available levels
+        self.level_manager.register_level("level_01.json")
+        self.level_manager.register_level("level_02.json")
+
+        # Load the first level
+        self.level = self.level_manager.load_level(0)
+
+        # Create the player at the level's spawn position
         self.player = Player(
-            100, 400, 32, 48, (0, 100, 255)
+            self.level.spawn_x,
+            self.level.spawn_y,
+            32,
+            48,
+            (0, 100, 255)
         )
 
-        # Create entity list
-        self.entities = [
+        #Sets camera
+        self.camera = Camera(
+            self.width,
+            self.height,
+            self.level.width,
+            self.level.height
+        )
 
-            self.player,
-
-            # Ground
-            Entity(0, 550, 3000, 50, (0, 180, 0), solid=True),
-
-            # Platforms
-            Entity(250, 450, 150, 20, (0, 180, 0), solid=True),
-            Entity(500, 350, 150, 20, (0, 180, 0), solid=True),
-
-            Entity(900, 450, 150, 20, (0, 180, 0), solid=True),
-            Entity(1200, 400, 150, 20, (0, 180, 0), solid=True),
-            Entity(1500, 350, 150, 20, (0, 180, 0), solid=True),
-            Entity(1900, 450, 150, 20, (0, 180, 0), solid=True),
-            Entity(2200, 400, 150, 20, (0, 180, 0), solid=True),
-            Entity(2500, 400, 150, 20, (0, 180, 0), solid=True)
-
-        ]
+        # Combine the player with the level's entities
+        self.entities = [self.player] + self.level.entities
 
         # Running state
         self.running = True
+
+    def next_level(self):
+
+        # Load the next level
+        self.level = self.level_manager.next_level()
+
+        # Reset player position
+        self.player.x = float(self.level.spawn_x)
+        self.player.y = float(self.level.spawn_y)
+
+        # Reset movement and physics state
+        self.player.velocity_x = 0
+        self.player.velocity_y = 0
+        self.player.grounded = False
+
+        # Replace old level entities
+        self.entities = [self.player] + self.level.entities
+
+        # Update camera world dimensions
+        self.camera.world_width = self.level.width
+        self.camera.world_height = self.level.height
+
+        # Immediately reposition camera
+        self.camera.follow(self.player)
+
+        print(
+            f"Loaded level {self.level_manager.current_index + 1}"
+        )
 
     def run(self):
         while self.running:
@@ -93,19 +122,29 @@ class Game:
             if event.type == pygame.QUIT:
                 self.running = False
 
+            # Switch to the next level when N is pressed
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_n:
+                self.next_level()
+
+            # Handle jumping
             elif self.input_handler.get_jump_input(event):
                 self.player.jump()
 
     def update(self, dt):
 
+        # Process horizontal input
         direction = self.input_handler.get_horizontal_input()
 
         self.player.velocity_x = direction * self.player.speed
 
-        solids = [
-            entity for entity in self.entities
-            if entity.solid
-        ]
+        # Retrieve solid objects from the current level
+        solids = self.level.get_solids()
+
+        # Update player physics and resolve collisions
+        CollisionSystem.move(self.player, solids, dt)
+
+        # Update camera position
+        self.camera.follow(self.player)
 
         CollisionSystem.move(self.player, solids, dt)
 

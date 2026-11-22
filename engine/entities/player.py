@@ -7,12 +7,12 @@ class Player(Entity):
         super().__init__(x, y, width, height, color)
 
         # Horizontal movement
-        self.speed = 250
+        self.speed = 200
         self.velocity_x = 0
 
         # Vertical movement
         self.velocity_y = 0
-        self.gravity = 1200
+        self.gravity = 1000
         self.jump_strength = -500
 
         # Player state

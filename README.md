@@ -122,7 +122,7 @@ Separate world coordinates from screen coordinates.
 
 Sprint 7: Level Management
 
-Status: In Progress
+Status: Complete
 
 Implement a Level class.
 
@@ -136,7 +136,7 @@ Separate level data from engine functionality.
 
 Sprint 8: Sprite and Animation Support
 
-Status: Planned
+Status: In Progress
 
 Load external image assets.
 
@@ -205,9 +205,9 @@ python main.py
 
 ## Development Status
 
-**Current Version:** 0.6.0
+**Current Version:** 0.7.0
 
-**Current Sprint:** Sprint 7 — Level Management
+**Current Sprint:** Sprint 8 — Sprite and Animation Support
 This project is under active development. Features and architecture may change as development progresses.
 
 ## Development Philosophy

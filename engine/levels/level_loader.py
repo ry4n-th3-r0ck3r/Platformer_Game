@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from engine.entities.entity import Entity
+from engine.entities.entity_factory import EntityFactory
 from engine.levels.level import Level
 
 
@@ -25,33 +25,13 @@ class LevelLoader:
         spawn_x = data["player_spawn"]["x"]
         spawn_y = data["player_spawn"]["y"]
 
-        # Store the entities created from JSON
-        entities = []
+        # Construct entities through the factory
+        entities = [
+            EntityFactory.create(entity_data)
+            for entity_data in data["entities"]
+        ]
 
-        # Convert JSON definitions into Python objects
-        for entity_data in data["entities"]:
-
-            entity_type = entity_data["type"]
-
-            if entity_type == "platform":
-
-                entity = Entity(
-                    x=entity_data["x"],
-                    y=entity_data["y"],
-                    width=entity_data["width"],
-                    height=entity_data["height"],
-                    color=tuple(entity_data["color"]),
-                    solid=entity_data["solid"]
-                )
-
-                entities.append(entity)
-
-            else:
-                raise ValueError(
-                    f"Unsupported entity type: {entity_type}"
-                )
-
-        # Construct the completed level
+        # Return the completed level
         return Level(
             width=width,
             height=height,
